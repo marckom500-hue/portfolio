@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Mes Projets | Marc-Axel KOM SILATCHOM{% endblock %}
+
+{% block content %}
+
+<section class="pt-32 pb-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+      <span class="w-5 h-px bg-teal-400"></span>Portfolio<span class="w-5 h-px bg-teal-400"></span>
+    </p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">Mes Projets</h1>
+    <p class="text-slate-400 max-w-xl mx-auto">Voici quelques projets que j'ai réalisés récemment avec passion et dédication.</p>
+  </div>
+</section>
+
+<section class="py-16 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col gap-16">
+    {% for projet in projets %}
+    <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-10 items-center {% if forloop.even %}md:grid-flow-dense{% endif %}" style="transition-delay:{{ forloop.counter0 }}00ms">
+      
+      <!-- Image -->
+      <div class="{% if forloop.even %}md:col-start-2{% endif %} rounded-2xl overflow-hidden border border-white/7 h-64">
+        <img 
+  class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
+  src="{% static projet.image %}" 
+  alt="{{ projet.titre }}"
+>
+        {% comment %} <img src="{{ projet.image }}" alt="{{ projet.titre }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/> {% endcomment %}
+      </div>
+      
+      <!-- Info -->
+      <div class="{% if forloop.even %}md:col-start-1 md:row-start-1{% endif %}">
+        <p class="text-teal-400 text-xs font-medium mb-2">{{ projet.type }}</p>
+        <h2 class="text-2xl font-bold text-white mb-3">{{ projet.titre }}</h2>
+        <p class="text-slate-400 leading-relaxed mb-5">{{ projet.description }}</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          {% for t in projet.technos %}
+          <span class="bg-teal-400/10 border border-teal-400/20 text-teal-400 text-xs font-medium px-3 py-1 rounded-full">{{ t }}</span>
+          {% endfor %}
+        </div>
+        <div class="flex gap-4">
+          <a href="{{ projet.github }}" target="_blank" class="gradient-accent text-slate-900 font-semibold px-5 py-2.5 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 transition-all text-sm">
+            <i class="fab fa-github"></i> Voir sur GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+    {% if not forloop.last %}
+    <hr class="border-white/5"/>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 px-6 bg-slate-900/50">
+  <div class="max-w-2xl mx-auto text-center reveal">
+    <h2 class="text-3xl font-bold mb-4">Vous avez un projet en tête ?<br>Parlons-en !</h2>
+    <p class="text-slate-400 mb-8">Je suis disponible pour de nouvelles collaborations et opportunités d'emploi.</p>
+    <a href="{% url 'contact' %}" class="gradient-accent text-slate-900 font-semibold px-8 py-3 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/30 transition-all">
+      <i class="fas fa-paper-plane"></i> Me contacter
+    </a>
+  </div>
+</section>
+
+{% endblock %}

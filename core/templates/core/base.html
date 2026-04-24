@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Marc-Axel KOM SILATCHOM | Développeur Web{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            teal: {
+              400: '#2dd4bf',
+              500: '#14b8a6',
+            },
+            brand: {
+              accent: '#00d4aa',
+              blue: '#0ea5e9',
+            },
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'fade-up': 'fadeUp 0.6s ease forwards',
+          },
+          keyframes: {
+            float: {
+              '0%,100%': {transform: 'translateY(0)'},
+              '50%': {transform: 'translateY(-12px)'},
+            },
+            fadeUp: {
+              '0%': {opacity: '0', transform: 'translateY(30px)'},
+              '100%': {opacity: '1', transform: 'translateY(0)'},
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body { background-color: #0a0e1a; }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #00d4aa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #00d4aa, #0ea5e9);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border-color: rgba(0,212,170,0.3);
+    }
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .skill-bar-inner {
+      animation: growBar 1.2s ease forwards;
+    }
+    @keyframes growBar {
+      from { width: 0; }
+      to { width: var(--target-width); }
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Nav active */
+    .nav-link-active { color: #00d4aa !important; }
+    /* WhatsApp */
+    .wa-btn { animation: pulse 2s infinite; }
+    @keyframes pulsewa {
+      0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+      70% { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+    }
+  </style>
+</head>
+<body class="text-slate-100 font-sans antialiased overflow-x-hidden">
+
+  <!-- BG BLOBS -->
+  <div class="blob w-[500px] h-[500px] bg-teal-500 top-[-150px] left-[-100px]"></div>
+  <div class="blob w-[400px] h-[400px] bg-blue-500 bottom-[10%] right-[-100px]"></div>
+  <div class="blob w-[300px] h-[300px] bg-purple-500 top-[50%] left-[40%]"></div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <a href="{% url 'home' %}" class="font-bold text-xl gradient-text tracking-tight">M-A.KS</a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex gap-8 list-none">
+        <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'home' %}text-white{% endif %}">
+          Accueil<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+        </a></li>
+        <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'about' %}text-white{% endif %}">
+          À propos<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+        </a></li>
+        <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'projets' %}text-white{% endif %}">
+          Projets<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+        </a></li>
+        <li><a href="{% url 'contact' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'contact' %}text-white{% endif %}">
+          Contact<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+        </a></li>
+      </ul>
+
+      <a href="{% url 'contact' %}" class="hidden md:inline-flex items-center gap-2 border border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-slate-900 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
+        Me contacter
+      </a>
+
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-[5px] cursor-pointer" onclick="toggleMenu()">
+        <span class="block w-6 h-0.5 bg-white rounded transition-all"></span>
+        <span class="block w-6 h-0.5 bg-white rounded transition-all"></span>
+        <span class="block w-6 h-0.5 bg-white rounded transition-all"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-slate-900/98 border-t border-white/5 px-6 py-4 flex flex-col gap-4">
+      <a href="{% url 'home' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Accueil</a>
+      <a href="{% url 'about' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">À propos</a>
+      <a href="{% url 'projets' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Projets</a>
+      <a href="{% url 'contact' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Contact</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="relative z-10">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 bg-slate-950 border-t border-white/5 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="font-bold text-xl gradient-text mb-3">M-A.KS</div>
+          <p class="text-slate-400 text-sm leading-relaxed">Développeur Web passionné par la création d'expériences digitales modernes, performantes et intuitives.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Liens rapides</h4>
+          <ul class="space-y-2">
+            <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Accueil</a></li>
+            <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">À propos</a></li>
+            <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Projets</a></li>
+            <li><a href="{% url 'contact' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Contact</h4>
+          <ul class="space-y-2 text-slate-400 text-sm">
+            <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-teal-400 w-4"></i>Tocket, Bafoussam, Cameroun</li>
+            <li class="flex items-center gap-2"><i class="fas fa-envelope text-teal-400 w-4"></i>marckom500@gmail.com</li>
+            <li class="flex items-center gap-2"><i class="fas fa-phone text-teal-400 w-4"></i>+237 699 761 443</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Newsletter</h4>
+          <p class="text-slate-400 text-sm mb-3">Recevez mes dernières actualités et projets.</p>
+          <div class="flex">
+            <input type="email" placeholder="Votre email" class="flex-1 bg-slate-800 border border-slate-700 rounded-l-lg px-3 py-2 text-sm text-white placeholder-slate-500 outline-none focus:border-teal-400"/>
+            <button class="gradient-accent text-slate-900 font-semibold px-4 py-2 rounded-r-lg text-sm hover:opacity-90 transition-opacity">OK</button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/5 mt-10 pt-6 text-center text-slate-500 text-sm">
+        © 2026 KOM SILATCHOM MARC-AXEL. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/237699761443?text=Bonjour%20Marc-Axel,%20je%20viens%20de%20voir%20votre%20portfolio"
+     target="_blank"
+     class="fixed bottom-7 right-7 z-50 w-14 h-14 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center text-white text-2xl shadow-lg shadow-green-500/40 hover:scale-110 transition-all duration-300"
+     aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-slate-900/95', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-3');
+        navbar.classList.remove('py-5');
+      } else {
+        navbar.classList.remove('bg-slate-900/95', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'py-3');
+        navbar.classList.add('py-5');
+      }
+    });
+
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
