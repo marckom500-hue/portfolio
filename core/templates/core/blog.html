@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Blog | Marc-Axel KOM SILATCHOM{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="pt-32 pb-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+      <span class="w-5 h-px bg-teal-400"></span>Blog<span class="w-5 h-px bg-teal-400"></span>
+    </p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">Mes Articles</h1>
+    <p class="text-slate-400 max-w-xl mx-auto text-lg">Réflexions, tutoriels et retours d'expérience sur le développement web.</p>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    {% if articles %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for article in articles %}
+      <a href="{% url 'blog_detail' article.slug %}" class="reveal card-hover bg-slate-800/60 border border-white/7 rounded-2xl overflow-hidden flex flex-col" style="transition-delay:{{ forloop.counter0 }}00ms">
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.titre }}" class="w-full h-48 object-cover"/>
+        {% else %}
+        <div class="w-full h-48 gradient-accent flex items-center justify-center text-slate-900 text-4xl">
+          <i class="fas fa-pen-nib"></i>
+        </div>
+        {% endif %}
+        <div class="p-6 flex flex-col flex-1">
+          <span class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-3">{{ article.categorie }}</span>
+          <h2 class="text-white font-bold text-lg mb-3 leading-snug">{{ article.titre }}</h2>
+          <p class="text-slate-400 text-sm leading-relaxed flex-1">{{ article.extrait }}</p>
+          <div class="flex items-center justify-between mt-5 pt-4 border-t border-white/5">
+            <span class="text-slate-500 text-xs flex items-center gap-1">
+              <i class="fas fa-calendar-alt text-teal-400"></i>
+              {{ article.date_publication|date:"d M Y" }}
+            </span>
+            <span class="text-teal-400 text-sm font-medium flex items-center gap-1">
+              Lire <i class="fas fa-arrow-right text-xs"></i>
+            </span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-24 reveal">
+      <div class="w-20 h-20 gradient-accent rounded-2xl flex items-center justify-center text-slate-900 text-3xl mx-auto mb-6">
+        <i class="fas fa-pen-nib"></i>
+      </div>
+      <h2 class="text-2xl font-bold mb-3">Aucun article pour l'instant</h2>
+      <p class="text-slate-400">Les premiers articles arrivent bientôt. Revenez vite !</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

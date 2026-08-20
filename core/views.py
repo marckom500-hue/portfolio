@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
+from .models import Article
 
 PROJETS = [
     {
@@ -95,3 +96,12 @@ def contact(request):
     if request.method == 'POST':
         return JsonResponse({'status': 'ok', 'message': 'Message reçu ! Je vous réponds très vite.'})
     return render(request, 'core/contact.html')
+
+def blog(request):
+    articles = Article.objects.filter(publie=True)
+    return render(request, 'core/blog.html', {'articles': articles})
+
+def blog_detail(request, slug):
+    article = get_object_or_404(Article, slug=slug, publie=True)
+    recents = Article.objects.filter(publie=True).exclude(slug=slug)[:3]
+    return render(request, 'core/blog_detail.html', {'article': article, 'recents': recents})

@@ -113,6 +113,9 @@
         <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'projets' %}text-white{% endif %}">
           Projets<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
         </a></li>
+        <li><a href="{% url 'blog' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'blog' or request.resolver_match.url_name == 'blog_detail' %}text-white{% endif %}">
+          Blog<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+        </a></li>
         <li><a href="{% url 'contact' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'contact' %}text-white{% endif %}">
           Contact<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
         </a></li>
@@ -135,6 +138,7 @@
       <a href="{% url 'home' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Accueil</a>
       <a href="{% url 'about' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">À propos</a>
       <a href="{% url 'projets' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Projets</a>
+      <a href="{% url 'blog' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Blog</a>
       <a href="{% url 'contact' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Contact</a>
     </div>
   </nav>
@@ -158,6 +162,7 @@
             <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Accueil</a></li>
             <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">À propos</a></li>
             <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Projets</a></li>
+            <li><a href="{% url 'blog' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Blog</a></li>
             <li><a href="{% url 'contact' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Contact</a></li>
           </ul>
         </div>

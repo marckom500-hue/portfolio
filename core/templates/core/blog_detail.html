@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ article.titre }} | Blog{% endblock %}
+
+{% block content %}
+
+<section class="pt-32 pb-20 px-6">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-slate-500 text-sm mb-10 reveal">
+      <a href="{% url 'blog' %}" class="hover:text-teal-400 transition-colors">Blog</a>
+      <i class="fas fa-chevron-right text-xs"></i>
+      <span class="text-slate-300 truncate max-w-xs">{{ article.titre }}</span>
+    </div>
+
+    <!-- Header -->
+    <div class="reveal mb-8">
+      <span class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 block">{{ article.categorie }}</span>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-5 leading-tight">{{ article.titre }}</h1>
+      <div class="flex items-center gap-4 text-slate-500 text-sm">
+        <span class="flex items-center gap-1"><i class="fas fa-calendar-alt text-teal-400"></i> {{ article.date_publication|date:"d F Y" }}</span>
+      </div>
+    </div>
+
+    <!-- Image -->
+    {% if article.image %}
+    <div class="reveal mb-10 rounded-2xl overflow-hidden">
+      <img src="{{ article.image.url }}" alt="{{ article.titre }}" class="w-full max-h-96 object-cover"/>
+    </div>
+    {% endif %}
+
+    <!-- Contenu -->
+    <div class="reveal prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-4 mb-16">
+      {{ article.contenu|linebreaks }}
+    </div>
+
+    <!-- Articles récents -->
+    {% if recents %}
+    <div class="border-t border-white/5 pt-12 reveal">
+      <h3 class="text-xl font-bold mb-6">Autres articles</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {% for r in recents %}
+        <a href="{% url 'blog_detail' r.slug %}" class="card-hover bg-slate-800/60 border border-white/7 rounded-xl p-5 flex flex-col gap-2">
+          <span class="text-teal-400 text-xs font-semibold uppercase tracking-widest">{{ r.categorie }}</span>
+          <h4 class="text-white font-semibold text-sm leading-snug">{{ r.titre }}</h4>
+          <span class="text-slate-500 text-xs mt-auto">{{ r.date_publication|date:"d M Y" }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Retour -->
+    <div class="mt-10 reveal">
+      <a href="{% url 'blog' %}" class="inline-flex items-center gap-2 text-teal-400 hover:text-white transition-colors text-sm font-medium">
+        <i class="fas fa-arrow-left"></i> Retour au blog
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
