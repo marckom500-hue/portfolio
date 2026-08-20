@@ -134,12 +134,12 @@
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-slate-900/98 border-t border-white/5 px-6 py-4 flex flex-col gap-4">
-      <a href="{% url 'home' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Accueil</a>
-      <a href="{% url 'about' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">À propos</a>
-      <a href="{% url 'projets' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Projets</a>
-      <a href="{% url 'blog' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Blog</a>
-      <a href="{% url 'contact' %}" class="text-slate-300 hover:text-teal-400 font-medium transition-colors">Contact</a>
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-slate-950 border-t border-white/10 shadow-2xl shadow-black/40 px-6 py-5 flex flex-col gap-1">
+      <a href="{% url 'home' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Accueil</a>
+      <a href="{% url 'about' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">À propos</a>
+      <a href="{% url 'projets' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Projets</a>
+      <a href="{% url 'blog' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Blog</a>
+      <a href="{% url 'contact' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3">Contact</a>
     </div>
   </nav>
 
@@ -213,6 +213,16 @@
     function toggleMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
+
+    document.querySelectorAll('.mobile-menu-link').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      }
+    });
 
     // Reveal on scroll
     const reveals = document.querySelectorAll('.reveal');
