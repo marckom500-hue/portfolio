@@ -24,7 +24,7 @@ core/
 static/images/      # Votre photo
 ```
 
-## 🌐 Déploiement sur Render (comme Jodeanas)
+## 🌐 Déploiement sur Render 
 1. Pusher sur GitHub
 2. Nouveau "Web Service" sur render.com
 3. Build command : `pip install -r requirements.txt`

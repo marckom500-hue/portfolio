@@ -22,6 +22,47 @@ PROJETS = [
         'image': 'images/dashboard.jpg',
         'icon': 'fa-tooth',
     },
+    {
+        'id': 3,
+        'titre': 'CHIC DECOR',
+       'type': 'Projet réalisé pour une entreprise',
+        'description': "Site web complet de l'entreprise MUSEE ZE MKWUING:CHIC DECOR",
+        'technos': ['React', 'Vite', 'Tailwind CSS', 'Express'],
+        'github': 'https://github.com/marckom500-hue/chic-decor',
+        'image': 'images/dashchicdecor.png',
+        'icon': 'fa-tooth',
+    },
+    {
+        'id': 4,
+        'titre': 'TFC SHOP',
+       'type': 'Projet réalisé pour une entreprise',
+        'description': "Site e-commerce complet pour TFC SHOP Cameroun",
+        'technos': ['Next.js', 'Tailwind CSS'],
+        'github': 'https://github.com/marckom500-hue/TFC-SHOP',
+        'image': 'images/dashtfcshop.png',
+        'icon': 'fa-tooth',
+    },
+       {
+        'id': 5,
+        'titre': 'BiblioGestion',
+        'type': 'Projet réalisé dans le cadre academique',
+        'description': "Application mobile de gestion de bibliothèque scolaire",
+        'technos': ['Dart', 'Kotlin'],
+        'github': 'https://github.com/marckom500-hue/bibliotheque_scolaire',
+        'image': 'images/dashbiblio.jpg',
+        'icon': 'fa-tooth',
+    },
+    {
+        'id': 6,
+        'titre': 'SOGECO-CONNECT',
+        'type': 'Projet réalisé dans le cadre academique',
+        'description': "Plateforme de gestion de stock multi-magasins avec rôles, signature électronique, traçabilité et un espace fournisseur intégré de SOGECO SARL dans la ville de Bafoussam",
+       'technos': ['React', 'Vite', 'Tailwind CSS', 'React Context API', 'Lucide React', 'Recharts', 'PostCSS', 'Autoprefixer', 'Oxlint'],
+        'github': 'https://github.com/marckom500-hue/sogeco-connect.git',
+        'image': 'images/dashsogeco.png',
+        'icon': 'fa-tooth',
+    },
+
 ]
 
 COMPETENCES = [
