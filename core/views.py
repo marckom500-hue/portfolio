@@ -1,6 +1,39 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
-from .models import Article
+from datetime import date
+from types import SimpleNamespace
+
+from django.http import Http404, JsonResponse
+from django.shortcuts import render
+
+
+ARTICLES = [
+    SimpleNamespace(
+        titre='Les étapes essentielles pour déployer Django',
+        slug='deployer-django',
+        extrait='Préparer une application Django pour un hébergement fiable.',
+        contenu='Un déploiement Django doit utiliser des réglages de production.\n\nCommencez par protéger les variables secrètes, configurer les fichiers statiques et choisir un hébergement adapté. Vérifiez ensuite les migrations et les journaux avant de mettre le site en ligne.',
+        image=None,
+        categorie='Django',
+        date_publication=date(2026, 8, 20),
+    ),
+    SimpleNamespace(
+        titre='Créer une interface web claire et efficace',
+        slug='interface-web-claire-efficace',
+        extrait='Quelques principes pour concevoir une expérience utilisateur simple et agréable.',
+        contenu='Une bonne interface commence par une hiérarchie visuelle lisible.\n\nChaque écran doit guider l’utilisateur vers l’action principale, avec des espacements cohérents, des contrastes suffisants et une navigation prévisible sur mobile comme sur ordinateur.',
+        image=None,
+        categorie='Design web',
+        date_publication=date(2026, 8, 15),
+    ),
+    SimpleNamespace(
+        titre='Pourquoi utiliser Git dans chaque projet',
+        slug='pourquoi-utiliser-git',
+        extrait='Git permet de suivre les évolutions d’un projet et de travailler avec méthode.',
+        contenu='Git conserve l’historique du code et facilite les retours en arrière.\n\nDes commits courts et explicites rendent le travail plus lisible et permettent de déployer une version stable avec davantage de confiance.',
+        image=None,
+        categorie='Développement',
+        date_publication=date(2026, 8, 10),
+    ),
+]
 
 PROJETS = [
     {
@@ -98,10 +131,11 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 def blog(request):
-    articles = Article.objects.filter(publie=True)
-    return render(request, 'core/blog.html', {'articles': articles})
+    return render(request, 'core/blog.html', {'articles': ARTICLES})
 
 def blog_detail(request, slug):
-    article = get_object_or_404(Article, slug=slug, publie=True)
-    recents = Article.objects.filter(publie=True).exclude(slug=slug)[:3]
+    article = next((article for article in ARTICLES if article.slug == slug), None)
+    if article is None:
+        raise Http404('Article introuvable')
+    recents = [article for article in ARTICLES if article.slug != slug][:3]
     return render(request, 'core/blog_detail.html', {'article': article, 'recents': recents})

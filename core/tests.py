@@ -1,14 +1,9 @@
 from django.test import TestCase
-from .models import Article
+from .views import ARTICLES
 
 class BlogViewsTests(TestCase):
 	def setUp(self):
-		self.article = Article.objects.create(
-			titre='Les étapes essentielles pour déployer Django',
-			extrait='Préparer une application Django pour un hébergement fiable.',
-			contenu='Un déploiement Django doit utiliser des réglages de production.',
-			categorie='Django',
-		)
+		self.article = ARTICLES[0]
 
 	def test_blog_page_displays_articles(self):
 		response = self.client.get('/blog/')
