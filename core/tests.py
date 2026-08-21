@@ -11,12 +11,14 @@ class BlogViewsTests(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertContains(response, 'Mes Articles')
 		self.assertContains(response, self.article.titre)
+		self.assertContains(response, '/static/images/article1.jpg')
 
 	def test_blog_detail_page_displays_article(self):
 		response = self.client.get(f'/blog/{self.article.slug}/')
 
 		self.assertEqual(response.status_code, 200)
 		self.assertContains(response, self.article.titre)
+		self.assertContains(response, '/static/images/article1.jpg')
 
 	def test_unknown_article_returns_404(self):
 		response = self.client.get('/blog/article-inexistant/')

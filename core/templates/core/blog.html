@@ -24,7 +24,7 @@
       {% for article in articles %}
       <a href="{% url 'blog_detail' article.slug %}" class="reveal card-hover bg-slate-800/60 border border-white/7 rounded-2xl overflow-hidden flex flex-col" style="transition-delay:{{ forloop.counter0 }}00ms">
         {% if article.image %}
-        <img src="{{ article.image.url }}" alt="{{ article.titre }}" class="w-full h-48 object-cover"/>
+        <img src="{% static article.image %}" alt="{{ article.titre }}" class="w-full h-48 object-cover"/>
         {% else %}
         <div class="w-full h-48 gradient-accent flex items-center justify-center text-slate-900 text-4xl">
           <i class="fas fa-pen-nib"></i>
