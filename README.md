@@ -9,6 +9,25 @@ python manage.py runserver
 
 Puis ouvrir : http://127.0.0.1:8000
 
+## Déploiement sur Vercel
+
+SQLite ne peut pas être utilisé comme base de production sur Vercel : le système de fichiers du déploiement est en lecture seule et éphémère. Connecter une base PostgreSQL (Neon, Supabase ou Vercel Postgres), puis ajouter ces variables d'environnement dans Vercel :
+
+```text
+DATABASE_URL=postgresql://...
+# ou POSTGRES_URL selon le fournisseur
+DJANGO_SECRET_KEY=une-cle-secrete-longue
+DJANGO_DEBUG=False
+```
+
+Après la première installation, exécuter les migrations contre cette base distante :
+
+```bash
+python manage.py migrate
+```
+
+Créer ensuite un compte administrateur avec `python manage.py createsuperuser` et ajouter les articles depuis `/admin/`.
+
 ## 📁 Structure
 ```
 portfolio/          # Config Django
