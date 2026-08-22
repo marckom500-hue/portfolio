@@ -16,9 +16,17 @@ INSTALLED_APPS = [
     'core',
 ]
 
+LANGUAGE_CODE = 'fr'
+LANGUAGES = [
+    ('fr', 'Français'),
+    ('en', 'English'),
+]
+USE_I18N = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

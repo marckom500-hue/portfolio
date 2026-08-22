@@ -1,10 +1,11 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="{{ CURRENT_LANGUAGE }}" class="scroll-smooth">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{% block title %}Marc-Axel KOM SILATCHOM | Développeur FullStack{% endblock %}</title>
+  <title>{% block title %}Marc-Axel KOM SILATCHOM | {% if CURRENT_LANGUAGE == 'en' %}Full Stack Developer{% else %}Développeur Full Stack{% endif %}{% endblock %}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -105,13 +106,13 @@
       <!-- Desktop links -->
       <ul class="hidden md:flex gap-8 list-none">
         <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'home' %}text-white{% endif %}">
-          Accueil<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+          {% if CURRENT_LANGUAGE == 'en' %}Home{% else %}Accueil{% endif %}<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
         </a></li>
         <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'about' %}text-white{% endif %}">
-          À propos<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+          {% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %}<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
         </a></li>
         <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'projets' %}text-white{% endif %}">
-          Projets<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
+          {% if CURRENT_LANGUAGE == 'en' %}Projects{% else %}Projets{% endif %}<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
         </a></li>
         <li><a href="{% url 'blog' %}" class="text-slate-400 hover:text-white text-sm font-medium transition-colors relative group {% if request.resolver_match.url_name == 'blog' or request.resolver_match.url_name == 'blog_detail' %}text-white{% endif %}">
           Blog<span class="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full"></span>
@@ -122,8 +123,22 @@
       </ul>
 
       <a href="{% url 'contact' %}" class="hidden md:inline-flex items-center gap-2 border border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-slate-900 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
-        Me contacter
+        {% if CURRENT_LANGUAGE == 'en' %}Contact me{% else %}Me contacter{% endif %}
       </a>
+      <form action="{% url 'set_language' %}" method="post" class="hidden md:block">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <input name="language" type="hidden" value="{% if CURRENT_LANGUAGE == 'fr' %}en{% else %}fr{% endif %}">
+        <button type="submit" class="text-xs font-semibold text-slate-400 hover:text-teal-400 transition-colors" aria-label="{% if CURRENT_LANGUAGE == 'fr' %}Switch to English{% else %}Passer au français{% endif %}">
+          {% if CURRENT_LANGUAGE == 'fr' %}EN{% else %}FR{% endif %}
+        </button>
+      </form>
+        <form action="{% url 'set_language' %}" method="post" class="pt-3">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.get_full_path }}">
+          <input name="language" type="hidden" value="{% if CURRENT_LANGUAGE == 'fr' %}en{% else %}fr{% endif %}">
+          <button type="submit" class="text-teal-400 font-semibold text-sm">{% if CURRENT_LANGUAGE == 'fr' %}English{% else %}Français{% endif %}</button>
+        </form>
 
       <!-- Hamburger -->
       <button id="hamburger" class="md:hidden flex flex-col gap-[5px] cursor-pointer" onclick="toggleMenu()">
@@ -135,9 +150,9 @@
 
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-slate-950 border-t border-white/10 shadow-2xl shadow-black/40 px-6 py-5 flex flex-col gap-1">
-      <a href="{% url 'home' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Accueil</a>
-      <a href="{% url 'about' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">À propos</a>
-      <a href="{% url 'projets' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Projets</a>
+      <a href="{% url 'home' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">{% if CURRENT_LANGUAGE == 'en' %}Home{% else %}Accueil{% endif %}</a>
+      <a href="{% url 'about' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">{% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %}</a>
+      <a href="{% url 'projets' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">{% if CURRENT_LANGUAGE == 'en' %}Projects{% else %}Projets{% endif %}</a>
       <a href="{% url 'blog' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3 border-b border-white/5">Blog</a>
       <a href="{% url 'contact' %}" class="mobile-menu-link text-slate-300 hover:text-teal-400 font-medium transition-colors py-3">Contact</a>
     </div>
@@ -154,14 +169,14 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <div class="font-bold text-xl gradient-text mb-3">M-A.KS</div>
-          <p class="text-slate-400 text-sm leading-relaxed">Développeur Web passionné par la création d'expériences digitales modernes, performantes et intuitives.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">{% if CURRENT_LANGUAGE == 'en' %}Full Stack developer passionate about creating modern, high-performing and intuitive digital experiences.{% else %}Développeur Full Stack passionné par la création d'expériences digitales modernes, performantes et intuitives.{% endif %}</p>
         </div>
         <div>
-          <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Liens rapides</h4>
+          <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">{% if CURRENT_LANGUAGE == 'en' %}Quick links{% else %}Liens rapides{% endif %}</h4>
           <ul class="space-y-2">
-            <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Accueil</a></li>
-            <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">À propos</a></li>
-            <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Projets</a></li>
+            <li><a href="{% url 'home' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">{% if CURRENT_LANGUAGE == 'en' %}Home{% else %}Accueil{% endif %}</a></li>
+            <li><a href="{% url 'about' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">{% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %}</a></li>
+            <li><a href="{% url 'projets' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">{% if CURRENT_LANGUAGE == 'en' %}Projects{% else %}Projets{% endif %}</a></li>
             <li><a href="{% url 'blog' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Blog</a></li>
             <li><a href="{% url 'contact' %}" class="text-slate-400 hover:text-teal-400 text-sm transition-colors">Contact</a></li>
           </ul>
@@ -169,28 +184,28 @@
         <div>
           <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Contact</h4>
           <ul class="space-y-2 text-slate-400 text-sm">
-            <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-teal-400 w-4"></i>Tocket, Bafoussam, Cameroun</li>
+            <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-teal-400 w-4"></i>Tocket, Bafoussam, {% if CURRENT_LANGUAGE == 'en' %}Cameroon{% else %}Cameroun{% endif %}</li>
             <li class="flex items-center gap-2"><i class="fas fa-envelope text-teal-400 w-4"></i>marckom500@gmail.com</li>
             <li class="flex items-center gap-2"><i class="fas fa-phone text-teal-400 w-4"></i>+237 699 761 443</li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-widest">Newsletter</h4>
-          <p class="text-slate-400 text-sm mb-3">Recevez mes dernières actualités et projets.</p>
+          <p class="text-slate-400 text-sm mb-3">{% if CURRENT_LANGUAGE == 'en' %}Receive my latest news and projects.{% else %}Recevez mes dernières actualités et projets.{% endif %}</p>
           <div class="flex">
-            <input type="email" placeholder="Votre email" class="flex-1 bg-slate-800 border border-slate-700 rounded-l-lg px-3 py-2 text-sm text-white placeholder-slate-500 outline-none focus:border-teal-400"/>
+            <input type="email" placeholder="{% if CURRENT_LANGUAGE == 'en' %}Your email{% else %}Votre email{% endif %}" class="flex-1 bg-slate-800 border border-slate-700 rounded-l-lg px-3 py-2 text-sm text-white placeholder-slate-500 outline-none focus:border-teal-400"/>
             <button class="gradient-accent text-slate-900 font-semibold px-4 py-2 rounded-r-lg text-sm hover:opacity-90 transition-opacity">OK</button>
           </div>
         </div>
       </div>
       <div class="border-t border-white/5 mt-10 pt-6 text-center text-slate-500 text-sm">
-        © 2026 KOM SILATCHOM MARC-AXEL. Tous droits réservés.
+        © 2026 KOM SILATCHOM MARC-AXEL. {% if CURRENT_LANGUAGE == 'en' %}All rights reserved.{% else %}Tous droits réservés.{% endif %}
       </div>
     </div>
   </footer>
 
   <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/237699761443?text=Bonjour%20Marc-Axel,%20je%20viens%20de%20voir%20votre%20portfolio"
+  <a href="https://wa.me/237699761443?text={% if CURRENT_LANGUAGE == 'en' %}Hello%20Marc-Axel,%20I%20just%20visited%20your%20portfolio{% else %}Bonjour%20Marc-Axel,%20je%20viens%20de%20voir%20votre%20portfolio{% endif %}"
      target="_blank"
      class="fixed bottom-7 right-7 z-50 w-14 h-14 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center text-white text-2xl shadow-lg shadow-green-500/40 hover:scale-110 transition-all duration-300"
      aria-label="WhatsApp">

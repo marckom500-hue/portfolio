@@ -11,8 +11,8 @@
     <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
       <span class="w-5 h-px bg-teal-400"></span>Blog<span class="w-5 h-px bg-teal-400"></span>
     </p>
-    <h1 class="text-5xl font-bold tracking-tight mb-4">Mes Articles</h1>
-    <p class="text-slate-400 max-w-xl mx-auto text-lg">Réflexions, tutoriels et retours d'expérience sur le développement web.</p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">{% if CURRENT_LANGUAGE == 'en' %}My Articles{% else %}Mes Articles{% endif %}</h1>
+    <p class="text-slate-400 max-w-xl mx-auto text-lg">{% if CURRENT_LANGUAGE == 'en' %}Thoughts, tutorials and lessons learned about web development.{% else %}Réflexions, tutoriels et retours d'expérience sur le développement web.{% endif %}</p>
   </div>
 </section>
 
@@ -40,7 +40,7 @@
               {{ article.date_publication|date:"d M Y" }}
             </span>
             <span class="text-teal-400 text-sm font-medium flex items-center gap-1">
-              Lire <i class="fas fa-arrow-right text-xs"></i>
+              {% if CURRENT_LANGUAGE == 'en' %}Read{% else %}Lire{% endif %} <i class="fas fa-arrow-right text-xs"></i>
             </span>
           </div>
         </div>
@@ -52,8 +52,8 @@
       <div class="w-20 h-20 gradient-accent rounded-2xl flex items-center justify-center text-slate-900 text-3xl mx-auto mb-6">
         <i class="fas fa-pen-nib"></i>
       </div>
-      <h2 class="text-2xl font-bold mb-3">Aucun article pour l'instant</h2>
-      <p class="text-slate-400">Les premiers articles arrivent bientôt. Revenez vite !</p>
+      <h2 class="text-2xl font-bold mb-3">{% if CURRENT_LANGUAGE == 'en' %}No articles yet{% else %}Aucun article pour l'instant{% endif %}</h2>
+      <p class="text-slate-400">{% if CURRENT_LANGUAGE == 'en' %}The first articles are coming soon. Come back shortly!{% else %}Les premiers articles arrivent bientôt. Revenez vite !{% endif %}</p>
     </div>
     {% endif %}
   </div>

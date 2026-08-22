@@ -5,6 +5,21 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import render
 
 
+def _localized(request, items, translations):
+    """Return shallow copies with translated display fields when English is active."""
+    if request.LANGUAGE_CODE != 'en':
+        return items
+    localized_items = []
+    for index, item in enumerate(items, start=1):
+        key = item.get('id', index) if isinstance(item, dict) else item.slug
+        values = translations.get(key, {})
+        if isinstance(item, dict):
+            localized_items.append({**item, **values})
+        else:
+            localized_items.append(SimpleNamespace(**{**item.__dict__, **values}))
+    return localized_items
+
+
 ARTICLES = [
     SimpleNamespace(
         titre='Les étapes essentielles pour déployer Django',
@@ -116,14 +131,37 @@ VALEURS = [
     {'titre': 'Créativité', 'desc': "J'aime créer des interfaces propres, accessibles et esthétiques qui offrent une vraie expérience utilisateur.", 'icon': 'fa-lightbulb'},
 ]
 
+PROJECT_TRANSLATIONS = {
+    1: {'titre': 'Broiler Chicken Management', 'type': 'Personal project (completed)', 'description': 'Complete inventory management web application with stock entries/exits, minimum threshold alerts, interactive dashboard and PDF report generation.'},
+    2: {'titre': 'Dental Clinic - SMILE', 'type': 'Personal project (completed)', 'description': 'Complete dental clinic management software with patient records, interactive appointment calendar, billing, prescriptions and practitioner dashboard.'},
+        3: {'titre': 'CHIC DECOR', 'type': 'Project delivered for a company', 'description': 'Complete website for MUSEE ZE MKWUING: CHIC DECOR.'},
+        4: {'titre': 'TFC SHOP', 'type': 'Project delivered for a company', 'description': 'Complete e-commerce website for TFC SHOP Cameroon.'},
+        5: {'titre': 'BiblioGestion', 'type': 'Academic project', 'description': 'Mobile application for managing a school library.'},
+        6: {'titre': 'SOGECO-CONNECT', 'type': 'Academic project', 'description': 'Multi-store inventory management platform with roles, electronic signature, traceability and an integrated supplier area for SOGECO SARL in Bafoussam.'},
+}
+
+VALUE_TRANSLATIONS = {
+    1: {'titre': 'Rigor', 'desc': 'I approach every project with method and precision to deliver clean, maintainable code.'},
+    2: {'titre': 'Independence', 'desc': 'I learn independently through projects, tutorials and research to build skills quickly.'},
+    3: {'titre': 'Creativity', 'desc': 'I enjoy creating clean, accessible and attractive interfaces that offer a genuine user experience.'},
+}
+
+ARTICLE_TRANSLATIONS = {
+    'deployer-django': {'titre': 'Essential steps for deploying Django', 'extrait': 'Preparing a Django application for reliable hosting.', 'contenu': 'A Django deployment should use production-ready settings.\n\nStart by protecting secret variables, configuring static files and choosing suitable hosting. Then check migrations and logs before putting the site online.', 'categorie': 'Django'},
+    'interface-web-claire-efficace': {'titre': 'Creating a clear and effective web interface', 'extrait': 'A few principles for designing a simple and pleasant user experience.', 'contenu': 'A good interface starts with a clear visual hierarchy.\n\nEach screen should guide users toward the primary action, with consistent spacing, sufficient contrast and predictable navigation on mobile and desktop.', 'categorie': 'Web design'},
+    'pourquoi-utiliser-git': {'titre': 'Why use Git in every project', 'extrait': 'Git tracks project changes and makes teamwork more disciplined.', 'contenu': 'Git preserves code history and makes it easy to roll back changes.\n\nShort, descriptive commits make work easier to understand and allow a stable version to be deployed with greater confidence.', 'categorie': 'Development'},
+}
+
 def home(request):
-    return render(request, 'core/home.html', {'projets': PROJETS[:2]})
+    projets = _localized(request, PROJETS[:2], PROJECT_TRANSLATIONS)
+    return render(request, 'core/home.html', {'projets': projets})
 
 def about(request):
-    return render(request, 'core/about.html', {'competences': COMPETENCES, 'valeurs': VALEURS})
+    valeurs = _localized(request, VALEURS, VALUE_TRANSLATIONS)
+    return render(request, 'core/about.html', {'competences': COMPETENCES, 'valeurs': valeurs})
 
 def projets(request):
-    return render(request, 'core/projets.html', {'projets': PROJETS})
+    return render(request, 'core/projets.html', {'projets': _localized(request, PROJETS, PROJECT_TRANSLATIONS)})
 
 def contact(request):
     if request.method == 'POST':
@@ -131,11 +169,14 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 def blog(request):
-    return render(request, 'core/blog.html', {'articles': ARTICLES})
+    return render(request, 'core/blog.html', {'articles': _localized(request, ARTICLES, ARTICLE_TRANSLATIONS)})
 
 def blog_detail(request, slug):
     article = next((article for article in ARTICLES if article.slug == slug), None)
     if article is None:
         raise Http404('Article introuvable')
     recents = [article for article in ARTICLES if article.slug != slug][:3]
+    if request.LANGUAGE_CODE == 'en':
+        article = _localized(request, [article], ARTICLE_TRANSLATIONS)[0]
+        recents = _localized(request, recents, ARTICLE_TRANSLATIONS)
     return render(request, 'core/blog_detail.html', {'article': article, 'recents': recents})

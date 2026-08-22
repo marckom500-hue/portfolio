@@ -39,7 +39,7 @@
     <!-- Articles récents -->
     {% if recents %}
     <div class="border-t border-white/5 pt-12 reveal">
-      <h3 class="text-xl font-bold mb-6">Autres articles</h3>
+      <h3 class="text-xl font-bold mb-6">{% if CURRENT_LANGUAGE == 'en' %}Other articles{% else %}Autres articles{% endif %}</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         {% for r in recents %}
         <a href="{% url 'blog_detail' r.slug %}" class="card-hover bg-slate-800/60 border border-white/7 rounded-xl p-5 flex flex-col gap-2">
@@ -55,7 +55,7 @@
     <!-- Retour -->
     <div class="mt-10 reveal">
       <a href="{% url 'blog' %}" class="inline-flex items-center gap-2 text-teal-400 hover:text-white transition-colors text-sm font-medium">
-        <i class="fas fa-arrow-left"></i> Retour au blog
+        <i class="fas fa-arrow-left"></i> {% if CURRENT_LANGUAGE == 'en' %}Back to blog{% else %}Retour au blog{% endif %}
       </a>
     </div>
 

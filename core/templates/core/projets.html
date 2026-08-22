@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}Mes Projets | Marc-Axel KOM SILATCHOM{% endblock %}
+{% block title %}{% if CURRENT_LANGUAGE == 'en' %}My Projects{% else %}Mes Projets{% endif %} | Marc-Axel KOM SILATCHOM{% endblock %}
 
 {% block content %}
 
@@ -9,8 +9,8 @@
     <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
       <span class="w-5 h-px bg-teal-400"></span>Portfolio<span class="w-5 h-px bg-teal-400"></span>
     </p>
-    <h1 class="text-5xl font-bold tracking-tight mb-4">Mes Projets</h1>
-    <p class="text-slate-400 max-w-xl mx-auto">Voici quelques projets que j'ai réalisés récemment avec passion et dédication.</p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">{% if CURRENT_LANGUAGE == 'en' %}My Projects{% else %}Mes Projets{% endif %}</h1>
+    <p class="text-slate-400 max-w-xl mx-auto">{% if CURRENT_LANGUAGE == 'en' %}Here are some projects I recently completed with passion and dedication.{% else %}Voici quelques projets que j'ai réalisés récemment avec passion et dédication.{% endif %}</p>
   </div>
 </section>
 
@@ -41,7 +41,7 @@
         </div>
         <div class="flex gap-4">
           <a href="{{ projet.github }}" target="_blank" class="gradient-accent text-slate-900 font-semibold px-5 py-2.5 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 transition-all text-sm">
-            <i class="fab fa-github"></i> Voir sur GitHub
+            <i class="fab fa-github"></i> {% if CURRENT_LANGUAGE == 'en' %}View on GitHub{% else %}Voir sur GitHub{% endif %}
           </a>
         </div>
       </div>
@@ -56,10 +56,10 @@
 <!-- CTA -->
 <section class="py-20 px-6 bg-slate-900/50">
   <div class="max-w-2xl mx-auto text-center reveal">
-    <h2 class="text-3xl font-bold mb-4">Vous avez un projet en tête ?<br>Parlons-en !</h2>
-    <p class="text-slate-400 mb-8">Je suis disponible pour de nouvelles collaborations et opportunités d'emploi.</p>
+    <h2 class="text-3xl font-bold mb-4">{% if CURRENT_LANGUAGE == 'en' %}Have a project in mind?<br>Let's talk!{% else %}Vous avez un projet en tête ?<br>Parlons-en !{% endif %}</h2>
+    <p class="text-slate-400 mb-8">{% if CURRENT_LANGUAGE == 'en' %}I am available for new collaborations and job opportunities.{% else %}Je suis disponible pour de nouvelles collaborations et opportunités d'emploi.{% endif %}</p>
     <a href="{% url 'contact' %}" class="gradient-accent text-slate-900 font-semibold px-8 py-3 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/30 transition-all">
-      <i class="fas fa-paper-plane"></i> Me contacter
+      <i class="fas fa-paper-plane"></i> {% if CURRENT_LANGUAGE == 'en' %}Contact me{% else %}Me contacter{% endif %}
     </a>
   </div>
 </section>

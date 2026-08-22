@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}À propos | Marc-Axel KOM SILATCHOM{% endblock %}
+{% block title %}{% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %} | Marc-Axel KOM SILATCHOM{% endblock %}
 
 {% block content %}
 
@@ -9,10 +9,10 @@
 <section class="pt-32 pb-16 px-6">
   <div class="max-w-6xl mx-auto text-center">
     <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
-      <span class="w-5 h-px bg-teal-400"></span>À propos<span class="w-5 h-px bg-teal-400"></span>
+      <span class="w-5 h-px bg-teal-400"></span>{% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %}<span class="w-5 h-px bg-teal-400"></span>
     </p>
-    <h1 class="text-5xl font-bold tracking-tight mb-4">À propos de moi</h1>
-    <p class="text-slate-400 max-w-xl mx-auto text-lg">Étudiant en Génie Informatique, passionné par la technologie, la musique et le sport.</p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">{% if CURRENT_LANGUAGE == 'en' %}About me{% else %}À propos de moi{% endif %}</h1>
+    <p class="text-slate-400 max-w-xl mx-auto text-lg">{% if CURRENT_LANGUAGE == 'en' %}Computer Engineering student, passionate about technology, music and sports.{% else %}Étudiant en Génie Informatique, passionné par la technologie, la musique et le sport.{% endif %}</p>
   </div>
 </section>
 
@@ -22,36 +22,36 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="reveal">
         <div class="relative max-w-sm mx-auto md:mx-0">
-          <img src="{% static 'images/portrait.png' %}" alt="Marc-Axel" class="w-full rounded-3xl object-cover object-top aspect-[3/4]"/>
+          <img src="{% static 'images/PORTRAIT_PORTFOLIO.png' %}" alt="Marc-Axel" class="w-full rounded-3xl object-cover object-top aspect-[3/4]"/>
           <div class="absolute -bottom-5 -right-5 bg-slate-800 border border-white/10 rounded-2xl px-5 py-4">
             <span class="text-3xl font-bold text-teal-400 block leading-none">20</span>
-            <span class="text-slate-400 text-xs">20 ans, Bafoussam</span>
+            <span class="text-slate-400 text-xs">20 {% if CURRENT_LANGUAGE == 'en' %}years old, Bafoussam{% else %}ans, Bafoussam{% endif %}</span>
           </div>
         </div>
       </div>
       <div class="reveal" style="transition-delay:0.15s">
         <h2 class="text-3xl font-bold mb-6 gradient-text">KOM SILATCHOM MARC-AXEL</h2>
         <p class="text-slate-400 leading-relaxed mb-4">
-          Je suis titulaire d'un <strong class="text-white">DUT en Génie Informatique option Génie Logiciel</strong>, obtenu à l'Institut Universitaire de Technologie Fotso Victor de Bandjoun.
+          {% if CURRENT_LANGUAGE == 'en' %}I hold a <strong class="text-white">Higher Technical Diploma in Computer Engineering, Software Engineering option</strong>, obtained at the Fotso Victor University Institute of Technology in Bandjoun.{% else %}Je suis titulaire d'un <strong class="text-white">DUT en Génie Informatique option Génie Logiciel</strong>, obtenu à l'Institut Universitaire de Technologie Fotso Victor de Bandjoun.{% endif %}
         </p>
         <p class="text-slate-400 leading-relaxed mb-4">
-          Rigoureux, je me distingue par mon esprit de synthèse et mes solides compétences rédactionnelles. 
+          {% if CURRENT_LANGUAGE == 'en' %}I stand out through my rigor, synthesis skills and strong writing abilities.{% else %}Rigoureux, je me distingue par mon esprit de synthèse et mes solides compétences rédactionnelles.{% endif %}
         </p>
         <p class="text-slate-400 leading-relaxed mb-8">
-          En dehors du développement, j'aime la musique, le cinéma et les débats télévisés.
+          {% if CURRENT_LANGUAGE == 'en' %}Outside development, I enjoy music, cinema and televised debates.{% else %}En dehors du développement, j'aime la musique, le cinéma et les débats télévisés.{% endif %}
         </p>
         <div class="grid grid-cols-3 gap-3">
           <div class="bg-slate-800/60 border border-white/7 rounded-xl p-4 text-center">
             <i class="fas fa-code text-teal-400 text-xl mb-2 block"></i>
-            <p class="text-xs text-slate-400">Génie Logiciel</p>
+            <p class="text-xs text-slate-400">{% if CURRENT_LANGUAGE == 'en' %}Software Engineering{% else %}Génie Logiciel{% endif %}</p>
           </div>
           <div class="bg-slate-800/60 border border-white/7 rounded-xl p-4 text-center">
             <i class="fas fa-map-marker-alt text-teal-400 text-xl mb-2 block"></i>
-            <p class="text-xs text-slate-400">Bafoussam, Cameroun</p>
+            <p class="text-xs text-slate-400">Bafoussam, {% if CURRENT_LANGUAGE == 'en' %}Cameroon{% else %}Cameroun{% endif %}</p>
           </div>
           <div class="bg-slate-800/60 border border-white/7 rounded-xl p-4 text-center">
             <i class="fas fa-graduation-cap text-teal-400 text-xl mb-2 block"></i>
-            <p class="text-xs text-slate-400">DUT en Genie Informatique</p>
+            <p class="text-xs text-slate-400">{% if CURRENT_LANGUAGE == 'en' %}Higher Technical Diploma in Computer Engineering{% else %}DUT en Génie Informatique{% endif %}</p>
           </div>
         </div>
       </div>
@@ -64,9 +64,9 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
-        <span class="w-5 h-px bg-teal-400"></span>Compétences<span class="w-5 h-px bg-teal-400"></span>
+        <span class="w-5 h-px bg-teal-400"></span>{% if CURRENT_LANGUAGE == 'en' %}Skills{% else %}Compétences{% endif %}<span class="w-5 h-px bg-teal-400"></span>
       </p>
-      <h2 class="text-4xl font-bold tracking-tight">Mes Compétences</h2>
+      <h2 class="text-4xl font-bold tracking-tight">{% if CURRENT_LANGUAGE == 'en' %}My Skills{% else %}Mes Compétences{% endif %}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {% for comp in competences %}
@@ -94,9 +94,9 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
-        <span class="w-5 h-px bg-teal-400"></span>Valeurs<span class="w-5 h-px bg-teal-400"></span>
+        <span class="w-5 h-px bg-teal-400"></span>{% if CURRENT_LANGUAGE == 'en' %}Values{% else %}Valeurs{% endif %}<span class="w-5 h-px bg-teal-400"></span>
       </p>
-      <h2 class="text-4xl font-bold tracking-tight">Mes Valeurs</h2>
+      <h2 class="text-4xl font-bold tracking-tight">{% if CURRENT_LANGUAGE == 'en' %}My Values{% else %}Mes Valeurs{% endif %}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {% for valeur in valeurs %}
@@ -112,13 +112,36 @@
   </div>
 </section>
 
+<!-- CV -->
+<section class="py-20 px-6 bg-slate-900/50">
+  <div class="max-w-4xl mx-auto">
+    <div class="reveal bg-slate-800/60 border border-white/10 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div>
+        <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-3">CV</p>
+        <h2 class="text-3xl font-bold mb-3">{% if CURRENT_LANGUAGE == 'en' %}My resume{% else %}Mon curriculum vitae{% endif %}</h2>
+        <p class="text-slate-400 leading-relaxed max-w-xl">
+          {% if CURRENT_LANGUAGE == 'en' %}Discover my background, skills and experience in detail.{% else %}Découvrez mon parcours, mes compétences et mon expérience en détail.{% endif %}
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 flex-shrink-0">
+        <a href="{% static 'CURRICULUM VITAE KOM SILATCHOM MARC-AXEL.pdf' %}" target="_blank" rel="noopener" class="border border-white/15 text-white px-5 py-3 rounded-xl inline-flex items-center gap-2 hover:border-teal-400 hover:text-teal-400 transition-all text-sm font-semibold">
+          <i class="fas fa-eye"></i> {% if CURRENT_LANGUAGE == 'en' %}View CV{% else %}Voir le CV{% endif %}
+        </a>
+        <a href="{% static 'CURRICULUM VITAE KOM SILATCHOM MARC-AXEL.pdf' %}" download class="gradient-accent text-slate-900 px-5 py-3 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/30 transition-all text-sm font-semibold">
+          <i class="fas fa-download"></i> {% if CURRENT_LANGUAGE == 'en' %}Download{% else %}Télécharger{% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="py-20 px-6 bg-slate-900/50">
   <div class="max-w-2xl mx-auto text-center reveal">
-    <h2 class="text-3xl font-bold mb-4">Vous avez un projet ?</h2>
+    <h2 class="text-3xl font-bold mb-4">{% if CURRENT_LANGUAGE == 'en' %}Have a project?{% else %}Vous avez un projet ?{% endif %}</h2>
     {% comment %} <p class="text-slate-400 mb-8">Je suis disponible pour un stage de 2 mois. N'hésitez pas à me contacter !</p> {% endcomment %}
     <a href="{% url 'contact' %}" class="gradient-accent text-slate-900 font-semibold px-8 py-3 rounded-xl inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/30 transition-all">
-      <i class="fas fa-paper-plane"></i> Me contacter
+      <i class="fas fa-paper-plane"></i> {% if CURRENT_LANGUAGE == 'en' %}Contact me{% else %}Me contacter{% endif %}
     </a>
   </div>
 </section>

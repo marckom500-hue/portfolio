@@ -9,8 +9,8 @@
     <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
       <span class="w-5 h-px bg-teal-400"></span>Contact<span class="w-5 h-px bg-teal-400"></span>
     </p>
-    <h1 class="text-5xl font-bold tracking-tight mb-4">Travaillons ensemble.</h1>
-    <p class="text-slate-400 max-w-lg mx-auto">Vous avez un projet ou une opportunité de stage ? Je suis disponible et prêt à apporter ma contribution.</p>
+    <h1 class="text-5xl font-bold tracking-tight mb-4">{% if CURRENT_LANGUAGE == 'en' %}Let's work together.{% else %}Travaillons ensemble.{% endif %}</h1>
+    <p class="text-slate-400 max-w-lg mx-auto">{% if CURRENT_LANGUAGE == 'en' %}Do you have a project or internship opportunity? I am available and ready to contribute.{% else %}Vous avez un projet ou une opportunité de stage ? Je suis disponible et prêt à apporter ma contribution.{% endif %}</p>
   </div>
 </section>
 
@@ -19,8 +19,8 @@
     
     <!-- Infos contact -->
     <div class="reveal">
-      <h3 class="text-xl font-semibold mb-2">Mes coordonnées</h3>
-      <p class="text-slate-400 text-sm mb-8">N'hésitez pas à me contacter par email, téléphone ou via les réseaux sociaux.</p>
+      <h3 class="text-xl font-semibold mb-2">{% if CURRENT_LANGUAGE == 'en' %}My contact details{% else %}Mes coordonnées{% endif %}</h3>
+      <p class="text-slate-400 text-sm mb-8">{% if CURRENT_LANGUAGE == 'en' %}Feel free to contact me by email, phone or social media.{% else %}N'hésitez pas à me contacter par email, téléphone ou via les réseaux sociaux.{% endif %}</p>
       
       <div class="flex flex-col gap-5 mb-10">
         <div class="flex items-center gap-4">
@@ -28,8 +28,8 @@
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div>
-            <p class="text-xs text-slate-500 mb-0.5">Localisation</p>
-            <p class="text-white text-sm font-medium">Tocket, Bafoussam, Cameroun</p>
+            <p class="text-xs text-slate-500 mb-0.5">{% if CURRENT_LANGUAGE == 'en' %}Location{% else %}Localisation{% endif %}</p>
+            <p class="text-white text-sm font-medium">Tocket, Bafoussam, {% if CURRENT_LANGUAGE == 'en' %}Cameroon{% else %}Cameroun{% endif %}</p>
           </div>
         </div>
         <div class="flex items-center gap-4">
@@ -46,7 +46,7 @@
             <i class="fas fa-phone"></i>
           </div>
           <div>
-            <p class="text-xs text-slate-500 mb-0.5">Téléphone</p>
+            <p class="text-xs text-slate-500 mb-0.5">{% if CURRENT_LANGUAGE == 'en' %}Phone{% else %}Téléphone{% endif %}</p>
             <a href="tel:+237699761443" class="text-white text-sm font-medium hover:text-teal-400 transition-colors">+237 699 761 443</a>
           </div>
         </div>
@@ -75,28 +75,28 @@
           {% csrf_token %}
           <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">Nom</label>
-              <input type="text" name="nom" placeholder="Votre nom" required
-                class="w-full bg-white/4 border border-white/7 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 outline-none focus:border-teal-400 focus:bg-teal-400/4 transition-all"/>
+              <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">{% if CURRENT_LANGUAGE == 'en' %}Name{% else %}Nom{% endif %}</label>
+              <input type="text" name="nom" placeholder="{% if CURRENT_LANGUAGE == 'en' %}Your name{% else %}Votre nom{% endif %}" required
+                class="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 text-sm placeholder-slate-500 outline-none focus:border-teal-400 focus:bg-white transition-all"/>
             </div>
             <div>
               <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">Email</label>
               <input type="email" name="email" placeholder="votre@email.com" required
-                class="w-full bg-white/4 border border-white/7 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 outline-none focus:border-teal-400 focus:bg-teal-400/4 transition-all"/>
+                class="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 text-sm placeholder-slate-500 outline-none focus:border-teal-400 focus:bg-white transition-all"/>
             </div>
           </div>
           <div class="mb-4">
-            <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">Sujet</label>
-            <input type="text" name="sujet" placeholder="Objet de votre message"
-              class="w-full bg-white/4 border border-white/7 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 outline-none focus:border-teal-400 focus:bg-teal-400/4 transition-all"/>
+              <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">{% if CURRENT_LANGUAGE == 'en' %}Subject{% else %}Sujet{% endif %}</label>
+            <input type="text" name="sujet" placeholder="{% if CURRENT_LANGUAGE == 'en' %}Message subject{% else %}Objet de votre message{% endif %}"
+              class="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 text-sm placeholder-slate-500 outline-none focus:border-teal-400 focus:bg-white transition-all"/>
           </div>
           <div class="mb-5">
             <label class="block text-slate-400 text-xs font-medium mb-2 uppercase tracking-wide">Message</label>
-            <textarea name="message" rows="5" placeholder="Décrivez votre projet ou opportunité..."
-              class="w-full bg-white/4 border border-white/7 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-600 outline-none focus:border-teal-400 focus:bg-teal-400/4 transition-all resize-none"></textarea>
+            <textarea name="message" rows="5" placeholder="{% if CURRENT_LANGUAGE == 'en' %}Describe your project or opportunity...{% else %}Décrivez votre projet ou opportunité...{% endif %}"
+              class="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 text-sm placeholder-slate-500 outline-none focus:border-teal-400 focus:bg-white transition-all resize-none"></textarea>
           </div>
           <button type="submit" class="w-full gradient-accent text-slate-900 font-semibold py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal-500/30 transition-all">
-            Envoyer le message →
+            {% if CURRENT_LANGUAGE == 'en' %}Send message{% else %}Envoyer le message{% endif %} →
           </button>
           <p id="form-msg" class="hidden text-teal-400 text-sm text-center mt-4"></p>
         </form>
@@ -109,7 +109,9 @@
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const msg = document.getElementById('form-msg');
-    msg.textContent = '✅ Message envoyé ! Je vous répondrai très bientôt.';
+    msg.textContent = document.documentElement.lang === 'en'
+      ? 'Message sent! I will get back to you very soon.'
+      : 'Message envoyé ! Je vous répondrai très bientôt.';
     msg.classList.remove('hidden');
     this.reset();
     setTimeout(() => msg.classList.add('hidden'), 5000);

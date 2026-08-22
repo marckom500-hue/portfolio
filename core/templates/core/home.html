@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Marc-Axel KOM SILATCHOM | Développeur Web{% endblock %}
+{% block title %}Marc-Axel KOM SILATCHOM | {% if CURRENT_LANGUAGE == 'en' %}Full Stack Developer{% else %}Développeur Full Stack{% endif %}{% endblock %}
 
 {% block content %}
 
@@ -17,33 +17,34 @@
         
         </div>
         <h1 class="text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-          <span class="gradient-text">Bonjour, je suis<br>MARC-AXEL</span>
+          <span class="gradient-text">{% if CURRENT_LANGUAGE == 'en' %}Hello, I am{% else %}Bonjour, je suis{% endif %}<br>MARC-AXEL</span>
         </h1>
         <p class="text-slate-400 text-lg leading-relaxed max-w-md mb-8">
-          Je suis <span class="text-white font-semibold">KOM SILATCHOM MARC-AXEL</span>, un développeur full stack passionné basé à Bafoussam.<br>
-          Je transforme des idées en expériences digitales modernes, intuitives et immersives.
+          {% if CURRENT_LANGUAGE == 'en' %}I am <span class="text-white font-semibold">KOM SILATCHOM MARC-AXEL</span>, a passionate full stack developer based in Bafoussam.<br>
+          I turn ideas into modern, intuitive and immersive digital experiences.{% else %}Je suis <span class="text-white font-semibold">KOM SILATCHOM MARC-AXEL</span>, un développeur full stack passionné basé à Bafoussam.<br>
+          Je transforme des idées en expériences digitales modernes, intuitives et immersives.{% endif %}
         </p>
         <div class="flex flex-wrap gap-4 mb-12">
           <a href="{% url 'about' %}" class="gradient-accent text-slate-900 font-semibold px-7 py-3 rounded-xl flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/30 transition-all duration-200">
-            <i class="fas fa-user"></i> À propos
+            <i class="fas fa-user"></i> {% if CURRENT_LANGUAGE == 'en' %}About{% else %}À propos{% endif %}
           </a>
           <a href="{% url 'projets' %}" class="border border-white/15 text-white px-7 py-3 rounded-xl flex items-center gap-2 hover:border-white/30 hover:bg-white/5 hover:-translate-y-1 transition-all duration-200">
-            <i class="fas fa-folder-open"></i> Mes projets
+            <i class="fas fa-folder-open"></i> {% if CURRENT_LANGUAGE == 'en' %}My projects{% else %}Mes projets{% endif %}
           </a>
         </div>
         <!-- Stats -->
         <div class="flex gap-8 pt-6 border-t border-white/5">
           <div>
             <div class="text-3xl font-bold text-teal-400">6+</div>
-            <div class="text-slate-500 text-xs mt-1">Projets réalisés</div>
+            <div class="text-slate-500 text-xs mt-1">{% if CURRENT_LANGUAGE == 'en' %}Completed projects{% else %}Projets réalisés{% endif %}</div>
           </div>
           <div>
             <div class="text-3xl font-bold text-teal-400">20</div>
-            <div class="text-slate-500 text-xs mt-1">Ans</div>
+            <div class="text-slate-500 text-xs mt-1">{% if CURRENT_LANGUAGE == 'en' %}Years old{% else %}Ans{% endif %}</div>
           </div>
           <div>
             <div class="text-3xl font-bold text-teal-400">DUT</div>
-            <div class="text-slate-500 text-xs mt-1">Génie Logiciel</div>
+            <div class="text-slate-500 text-xs mt-1">{% if CURRENT_LANGUAGE == 'en' %}Software Engineering{% else %}Génie Logiciel{% endif %}</div>
           </div>
         </div>
       </div>
@@ -54,13 +55,13 @@
           <div class="absolute inset-0 rounded-full bg-teal-400/10 blur-3xl scale-110"></div>
           <div class="relative w-72 h-72 md:w-80 md:h-80 rounded-full p-1 gradient-accent animate-spin-slow" style="animation: spin 12s linear infinite;">
             <div class="w-full h-full rounded-full bg-slate-900 overflow-hidden border-4 border-slate-900">
-              <img src="{% static 'images/portrait.png' %}" alt="Marc-Axel KOM SILATCHOM" class="w-full h-full object-cover object-top"/>
+              <img src="{% static 'images/PORTRAIT_PORTFOLIO.png' %}" alt="Marc-Axel KOM SILATCHOM" class="w-full h-full object-cover object-[center_40%]"/>
             </div>
           </div>
           <!-- Badge flottant -->
           <div class="absolute -bottom-4 -right-4 bg-slate-800 border border-white/10 rounded-2xl px-4 py-3 flex flex-col">
             <span class="text-2xl font-bold text-teal-400 leading-none">20</span>
-            <span class="text-slate-400 text-xs">ans, Bafoussam</span>
+            <span class="text-slate-400 text-xs">{% if CURRENT_LANGUAGE == 'en' %}years old, Bafoussam{% else %}ans, Bafoussam{% endif %}</span>
           </div>
         </div>
       </div>
@@ -69,7 +70,7 @@
     <!-- Scroll hint -->
     <div class="flex flex-col items-center gap-2 mt-16 text-slate-500 text-xs animate-bounce">
       <i class="fas fa-chevron-down text-xs"></i>
-      Découvrir
+      {% if CURRENT_LANGUAGE == 'en' %}Discover{% else %}Découvrir{% endif %}
     </div>
   </div>
 </section>
@@ -79,9 +80,9 @@
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="text-teal-400 text-xs font-semibold uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
-        <span class="w-5 h-px bg-teal-400"></span>Mes projets<span class="w-5 h-px bg-teal-400"></span>
+        <span class="w-5 h-px bg-teal-400"></span>{% if CURRENT_LANGUAGE == 'en' %}My projects{% else %}Mes projets{% endif %}<span class="w-5 h-px bg-teal-400"></span>
       </p>
-      <h2 class="text-4xl font-bold tracking-tight">Ce que j'ai construit</h2>
+      <h2 class="text-4xl font-bold tracking-tight">{% if CURRENT_LANGUAGE == 'en' %}What I have built{% else %}Ce que j'ai construit{% endif %}</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -112,7 +113,7 @@
             {% endfor %}
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <a href="{% url 'projets' %}" class="text-teal-400 text-sm font-medium hover:underline">Voir détails →</a>
+            <a href="{% url 'projets' %}" class="text-teal-400 text-sm font-medium hover:underline">{% if CURRENT_LANGUAGE == 'en' %}View details{% else %}Voir détails{% endif %} →</a>
             <a href="{{ projet.github }}" target="_blank" class="text-slate-400 hover:text-white text-sm flex items-center gap-1 transition-colors">
               <i class="fab fa-github"></i> GitHub
             </a>
@@ -124,7 +125,7 @@
 
     <div class="text-center mt-10 reveal">
       <a href="{% url 'projets' %}" class="border border-white/15 text-white px-8 py-3 rounded-xl inline-flex items-center gap-2 hover:border-teal-400 hover:text-teal-400 transition-all">
-        Voir tous les projets <i class="fas fa-arrow-right"></i>
+        {% if CURRENT_LANGUAGE == 'en' %}View all projects{% else %}Voir tous les projets{% endif %} <i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </div>
